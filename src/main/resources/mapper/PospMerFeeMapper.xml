@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitill.ibatis.dao.PospMerFeeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.unitill.ibatis.pojo.PospMerFee">
+        <id column="id" property="id" />
+        <result column="fee_no" property="feeNo" />
+        <result column="fee_name" property="feeName" />
+        <result column="fee_type" property="feeType" />
+        <result column="fee_basis" property="feeBasis" />
+        <result column="fee_method" property="feeMethod" />
+        <result column="create_time" property="createTime" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, fee_no AS feeNo, fee_name AS feeName, fee_type AS feeType, fee_basis AS feeBasis, fee_method AS feeMethod, create_time AS createTime, modify_time AS modifyTime
+    </sql>
+	
+	<select id="selectByMerId" resultType="com.unitill.ibatis.pojo.PospMerFee" parameterType="java.lang.String">
+		SELECT fee.id, fee_no AS feeNo, fee_name AS feeName, fee_type AS feeType, fee_basis AS feeBasis, fee_method AS feeMethod, fee.create_time AS createTime, fee.modify_time AS modifyTime
+		 from posp_mer_fee_info info LEFT JOIN posp_mer_fee fee ON fee.fee_no = info.fee_general_charging WHERE info.mer_id = #{merId}
+	</select>
+    <select id="selectByMerNo" resultType="com.unitill.ibatis.pojo.PospMerFee" parameterType="java.lang.String">
+        SELECT
+        fee.id,
+        fee_no AS feeNo,
+        fee_name AS feeName,
+        fee_type AS feeType,
+        fee_basis AS feeBasis,
+        fee_method AS feeMethod,
+        fee.create_time AS createTime,
+        fee.modify_time AS modifyTime
+        FROM
+        posp_mer_fee_info info
+        LEFT JOIN posp_mer_fee fee ON fee.fee_no = info.fee_general_charging
+        LEFT JOIN posp_mer mer ON info.mer_id = mer.id
+        WHERE mer.mer_no = #{merNo}
+    </select>
+
+</mapper>

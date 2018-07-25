@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitill.ibatis.dao.PospTerminalMapper">
+
+
+    <select id="selectForList" resultType="com.unitill.ibatis.pojo.PospTerminal" parameterType="com.unitill.ibatis.pojo.PospTerminal">
+        SELECT * FROM  posp_terminal t
+        WHERE 1=1
+        <if test="merId != null and merId != ''">
+            AND t.mer_num = #{merId}
+        </if>
+        <if test="terminalSerialNum != null and terminalSerialNum != ''">
+            AND t.terminal_serial_num = #{terminalSerialNum}
+        </if>
+        <if test="terminalState != null and terminalState != ''">
+            AND t.terminal_state = #{terminalState}
+        </if>
+
+    </select>
+</mapper>

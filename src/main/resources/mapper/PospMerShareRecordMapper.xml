@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitill.ibatis.dao.PospMerShareRecordMapper">
+
+
+    <insert id="insert" parameterType="com.unitill.ibatis.pojo.PospMerShareRecord">
+        INSERT INTO posp_mer_share_record (`id`, `mer_id`, `terminal_id`, `mer_order_id`, `bank_order_id`,
+        `channel_code`, `share_is`, `money`, `fee_money`, `bank_fee_money`, `summary`, `remark`, `payment_type`,
+        `create_time`, `modify_time`)
+        VALUES (#{id},  #{merId}, #{terminalId}, #{merOrderId}, #{bankOrderId},
+        #{channelCode}, #{shareIs}, #{money}, #{feeMoney}, #{bankFeeMoney}, #{summary}, #{remark}, #{paymentType},
+        NOW(), NOW())
+    </insert>
+    <update id="update" parameterType="com.unitill.ibatis.pojo.PospMerShareRecord">
+        UPDATE posp_mer_share_record SET modify_time=NOW() WHERE id=#{id};
+    </update>
+</mapper>

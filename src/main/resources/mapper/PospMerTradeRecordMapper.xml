@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.unitill.ibatis.dao.PospMerTradeRecordMapper">
+
+    <insert id="insert" parameterType="com.unitill.ibatis.pojo.PospMerTradeRecord">
+        INSERT INTO posp_mer_trade_record (`id`, `mer_id`, `terminal_id`, `mer_order_id`,
+        `bank_order_id`,`bank_card_no`, `bank_name`, `name`,
+        `channel_code`, `fee_reg`, `money`, `fee_money`, `fee_content`,
+        `bank_fee_money`, `order_status`, `summary`, `remark`, `payment_type`, `ret_code`,
+        `ret_data`, `create_time`, `modify_time`)
+        VALUES
+        (#{id}, #{merId}, #{terminalId}, #{merOrderId},
+        #{bankOrderId}, #{bankCardNo}, #{bankName}, #{name},
+        #{channelCode}, #{feeReg}, #{money}, #{feeMoney}, #{feeContent},
+        #{bankFeeMoney}, #{orderStatus}, #{summary}, #{remark}, #{paymentType}, #{retCode},
+        #{retData}, NOW(), NOW());
+
+    </insert>
+    <update id="update" parameterType="com.unitill.ibatis.pojo.PospMerTradeRecord">
+        UPDATE posp_mer_trade_record SET  `ret_data`=#{retData}, `modify_time`=NOW(),
+        `ret_code`=#{retCode}, `order_status`=#{orderStatus}, `bank_order_id`=#{bankOrderId}
+        WHERE id=#{id}
+    </update>
+</mapper>
